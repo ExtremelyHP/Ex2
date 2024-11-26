@@ -160,45 +160,63 @@
 		</style>
 	</head>
 	<body>
-		 <a href="introduce.html" id="introLink" class="intro-link" target="_blank">介绍</a>
+		<button id="change-bg-btn" type="button">切换背景</button> <!-- 新增的按钮 -->
+		<button id="play-music-btn" type="button">播放音乐</button> <!-- 新增的音乐播放按钮 -->
 		<div class="box">
-		    <h2>Login</h2>
+		    <h2>Register</h2>
 		    <div class="input-box">
 		        <label>账号</label>
-		        <input type="text" id="username" placeholder="请输入账号"/>
+		        <input type="text" placeholder="请输入账号"/>
 		    </div>
 		    <div class="input-box">
 		        <label>密码</label>
-		        <input type="password" id="password" placeholder="请输入密码"/>
+		        <input type="password" placeholder="请输入密码"/>
 		    </div>
-		    <div class="bin-box">
-		        <a href="#">忘记密码?</a>
+		    <div class="input-box">
+		        <label>确认密码</label>
+		        <input type="password" placeholder="请再次输入密码"/>
 		    </div>
 		    <div class="action-buttons">
-		        <button onclick="handleLogin()">登录</button>
-		        <a href="register.html" class="register-button">
-		            <button>注册</button>
+		        <button>注册</button>
+		        <a href="log.html" class="register-button">
+		            <button>返回</button>
 		        </a>
+		        
 		    </div>
 		</div>
+		<script>
+		    document.addEventListener("DOMContentLoaded", function() {
+		        const changeBgButton = document.getElementById('change-bg-btn');
+		        const playMusicButton = document.getElementById('play-music-btn');
+		        const bodyElement = document.body;
 		
-		<script type="text/javascript">
-			const correctUsername = '123456';
-			const correctPassword = '1234567';
-			
-			function handleLogin() {
-			    const username = document.getElementById('username').value;
-			    const password = document.getElementById('password').value;
-			
-			    // 检查输入的账号和密码是否正确
-			    if (username === correctUsername && password === correctPassword) {
-			        // 登录成功，跳转到主页或其他页面
-			        window.location.href = 'main.html';
-			    } else {
-			        // 登录失败，显示错误消息
-			        alert('账号或密码错误');
-			    }
-			}
+		        let currentBackgroundIndex = 0;
+		        const backgrounds = [
+		            'img/wukong.jpg', // 当前背景图片
+		            'img/wukong1.jpg', // 第二张背景图片
+		            'img/wukong2.jpg'
+		        ];
+		
+		        changeBgButton.addEventListener('click', function() {
+		            currentBackgroundIndex = (currentBackgroundIndex + 1) % backgrounds.length;
+		            bodyElement.style.backgroundImage = `url(${backgrounds[currentBackgroundIndex]})`;
+		        });
+		
+		        let audio = new Audio('img/yinyue.mp3'); // 替换为您的音频文件路径
+		        let isPlaying = false;
+		
+		        playMusicButton.addEventListener('click', function() {
+		            if (isPlaying) {
+		                audio.pause();
+		                isPlaying = false;
+		                playMusicButton.textContent = '播放音乐';
+		            } else {
+		                audio.play();
+		                isPlaying = true;
+		                playMusicButton.textContent = '暂停音乐';
+		            }
+		        });
+		    });
 		</script>
 	</body>
 </html>
